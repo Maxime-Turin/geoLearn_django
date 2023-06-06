@@ -1,19 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-  <title>geoLearn</title>
 
-</head>
-<body>
-  <header>
-    <h1>Test</h1>
-  </header>
-  <main>
-    <p>Contenu test</p>
-  </main>
-</body>
-</html>
+{%extends 'geoLearn/base.html'%}
+
+{%block content%}
+  <h2>Liste des pays enregistrés :</h2>
+  {%for country in countries%}
+  <h3>
+    <a href="{%url 'country_detail' pk=country.pk%}">{{country.name}}</a>
+  </h3>
+  {%endfor%}
+{%endblock%}
