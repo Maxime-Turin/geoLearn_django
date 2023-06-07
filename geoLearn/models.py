@@ -7,9 +7,10 @@ from django.db import models
 class Country(models.Model):
     name = models.CharField(max_length=50)
     capital_city = models.CharField(max_length=50)
-    population = models.IntegerField()
+    population = models.IntegerField(blank=True)
     official_language = models.CharField(max_length=50)
     continent = models.CharField(max_length=50)
+    flag = models.URLField(max_length=200, blank=True)
 
     def publish(self):
         self.save()

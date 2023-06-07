@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Country
+from .forms import CountryForm
 
 # Create your views here.
 
@@ -16,3 +17,26 @@ def country_list(request):
 def country_detail(request, pk):
     country = get_object_or_404(Country, pk=pk)
     return render(request, 'geoLearn/country_detail.html', {'country': country})
+
+
+def country_new(request):
+    if request.method == "POST":
+        form = CountryForm(request.POST)
+        if form.is_valid():
+            country = form.save()
+            return redirect('country_detail', pk=country.pk)
+    else:
+        form = CountryForm()
+    return render(request, 'geoLearn/country_edit.html', {'form': form})
+
+
+def country_edit(request, pk):
+    country = get_object_or_404(Country, pk=pk)
+    if request.method == "POST":
+        form = CountryForm(request.POST, instance=country)
+        if form.is_valid():
+            country = form.save()
+            return redirect('country_detail', pk=country.pk)
+    else:
+        form = CountryForm(instance=country)
+    return render(request, 'geoLearn/country_edit.html', {'form': form})

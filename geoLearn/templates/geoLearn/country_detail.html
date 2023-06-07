@@ -2,6 +2,10 @@
 
 {%block content%}
   <h2>{{country.name}}</h2>
+  <h3>
+    <a href="{%url 'country_edit' pk=country.pk%}">Modifier</a>
+  </h3>
+  <img src="{{country.flag}}" alt="flag of {{country.name}}">
   <ul>
     <li>Capitale : {{country.capital_city}}</li>
     <li>Population : {{country.population}}</li>
